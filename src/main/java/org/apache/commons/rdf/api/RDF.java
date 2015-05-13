@@ -13,8 +13,8 @@ public interface RDF<Graph,
                      Triple,
                      RDFTerm,
                      BlankNodeOrIRI extends RDFTerm,
-                     IRI extends RDFTerm,
-                     BlankNode extends RDFTerm,
+                     IRI extends BlankNodeOrIRI,
+                     BlankNode extends BlankNodeOrIRI,
                      Literal extends RDFTerm> {
     /* RDFTermFactory */
     BlankNode createBlankNode();
@@ -37,6 +37,10 @@ public interface RDF<Graph,
     Stream<? extends Triple> 	getTriplesAsStream(Graph graph);
     Iterable<Triple> getTriplesAsIterable(Graph graph, BlankNodeOrIRI subject, IRI predicate, RDFTerm object);
     long size(Graph graph);
+    /* Triple */
+    BlankNodeOrIRI getSubject(Triple triple);
+    IRI getPredicate(Triple triple);
+    RDFTerm getObject(Triple triple);
     /* RDFTerm */
     // this is very much like a Visitor. Note that this would work
     // even for RDFTerm =:= String and would still be type-safe. I beg that we do not rely on

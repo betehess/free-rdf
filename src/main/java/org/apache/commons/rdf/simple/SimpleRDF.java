@@ -72,6 +72,9 @@ public class SimpleRDF implements RDF<Graph, Triple, RDFTerm, BlankNodeOrIRI, IR
         return new TripleImpl(subject, predicate, object);
     }
 
+
+    //////////////
+
     public Graph add(Graph graph, BlankNodeOrIRI subject, IRI predicate, RDFTerm object) {
         graph.add(subject, predicate, object);
         return graph;
@@ -95,6 +98,15 @@ public class SimpleRDF implements RDF<Graph, Triple, RDFTerm, BlankNodeOrIRI, IR
     }
     public long size(Graph graph) {
         return graph.size();
+    }
+    public BlankNodeOrIRI getSubject(Triple triple) {
+        return triple.getSubject();
+    }
+    public IRI getPredicate(Triple triple) {
+        return triple.getPredicate();
+    }
+    public RDFTerm getObject(Triple triple) {
+        return triple.getObject();
     }
     public <T> T visit(RDFTerm t, Function<IRI, T> fIRI, Function<BlankNode, T> fBNode, Function<Literal, T> fLiteral) {
         if (t instanceof IRI) {
